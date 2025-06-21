@@ -17,15 +17,17 @@ class TweetFeatureExtractor:
         self.count_vectorizer = None
     
     def extract_text_features(self, texts: List[str], method: str = 'tfidf', 
-                            max_features: int = 5000, ngram_range: Tuple[int, int] = (1, 2)) -> np.ndarray:
+                            max_features: int = 300, ngram_range: Tuple[int, int] = (1, 2), 
+                            min_df: int = 3) -> np.ndarray:
         """
         Extract text-based features using TF-IDF or Count vectorization.
         
         Args:
             texts (List[str]): List of tweet texts
             method (str): 'tfidf' or 'count'
-            max_features (int): Maximum number of features
-            ngram_range (Tuple[int, int]): N-gram range
+            max_features (int): Maximum number of features (default: 300)
+            ngram_range (Tuple[int, int]): N-gram range (default: (1,2))
+            min_df (int): Minimum document frequency (default: 3)
             
         Returns:
             np.ndarray: Feature matrix
@@ -35,6 +37,7 @@ class TweetFeatureExtractor:
                 self.tfidf_vectorizer = TfidfVectorizer(
                     max_features=max_features,
                     ngram_range=ngram_range,
+                    min_df=min_df,
                     stop_words='english'
                 )
                 features = self.tfidf_vectorizer.fit_transform(texts)
@@ -46,6 +49,7 @@ class TweetFeatureExtractor:
                 self.count_vectorizer = CountVectorizer(
                     max_features=max_features,
                     ngram_range=ngram_range,
+                    min_df=min_df,
                     stop_words='english'
                 )
                 features = self.count_vectorizer.fit_transform(texts)
