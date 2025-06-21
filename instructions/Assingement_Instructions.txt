@@ -1,0 +1,117 @@
+﻿Assignment 3:
+Text classification and Authorship Attribution
+
+
+In this assignment you will be using various algorithms for text classification tasks: An authorship attribution (binary) task on Donald Trump’s tweets.  
+
+
+You will have to submit a comprehensive report, along with the code and classification output obtained on a test set.  
+
+
+Submission deadline: 
+23:59, Munday, June 9, 2025
+
+
+This assignment could be submitted in pairs. 
+
+
+Objectives:
+1. Learn to work with the sklearn library.
+2. Learn to work with the PyTorch library.
+3. Learn to work with the Google Colab environment
+4. Learn to design and interpret experiments in NLP (authorship recognition, classification).
+5. Understand the differences between the various algorithmic frameworks and their application to different types of data. 
+Algorithms:
+You should use Python’s nltk, sklearn and Pytorch packages/libraries for preprocessing, training and testing your classifiers (these packages are well documented and usage examples are part of the documentation).
+
+
+You should use:
+1. sklearn.linear_model.LogisticRegression 
+2. sklearn.svm.SVC (use both linear and nonlinear kernels!)
+3. You should use  the PyTorch library to build a FFNN classifier (with at least one hidden layer) to achieve the classification. Feel free to experiment with the number of layers (a simple tutorial for FFNN with PyTorch). 
+4. A fourth classifier of choice (neural or not). You are encouraged to experiment with classifiers that allow combining different types of features (e.g. number of capitalized words, time of tweeting, etc.)
+5. A fifth classifier of your choice  (this should be a neural transformer-based classifier: MLM or LLM) - feel free to experiment. 
+
+
+You are encouraged to use sklearn’s cross validation module. Think about the evaluation measures you use. 
+
+
+Authorship attribution: Who Controls this Account
+Politicians, as well as other public figures, usually have assistants and staffers that manage most of their social media presence. However, like many other norm defying actions, Donald Trump, the 45th (and 47th) President of the United States is taking pride in his untamed use of Twitter.  At times, during the presidential campaign, it was hypothesized (pdf) that Donald Trump is being kept away from his Twitter account in order to avoid unnecessary PR calamities. Trump’s tweets are not explicitly labeled (Hillary Clinton, for example, used to sign tweets composed by her by an addition of ‘-H’ at the end of the tweet while unsigned tweets were posted by her staffers). It is known, however, that Trump was using an android phone[1] while the staffers were most likely to use an iPhone. Luckily, the device information is part of the data available via the Twitter API, hence the device used can be used as an authorship label. 
+
+
+In this task you will be using a number of supervised machine learning classifiers in order to validate the hypothesis about Trump tweeting habits.
+
+
+Data:
+A small dataset containing a couple of thousands tweets from Trump’s account posted between early 2015 and mid 2017 can be found in tweets.tsv, available to download here.
+The file is in a tab separated format (.tsv), each tweet in a new line. The fields in the file correspond to:
+<tweet id> <user handle> <tweet text> <time stamp> <device> 
+While the data is already cleaned and filtered, there is still some degree of freedom you will have to take care of. Specifically:
+1. The handle field: the handle field can take one of the following three user names: realDonaldTrump (this is Trump’s account), POTUS (stands for President of the United States, this is the official presidential account, thus not Trump before the election) and PressSec - the official twitter account of the president’s Press Secretary. 
+2. The device field: the device field can take various values ranging from ‘android’, iphone’,  instagram among other possibilities.
+3. The format of the timestamp field is '%Y-%m-%d %H:%M:%S' you can use the datetime module and the strftime() and strptime() functions to parse and process timestamps. 
+
+
+An unlabeled test set with 200 tweets is available here. This file lacks the <tweet id> and <device> fields.  
+
+
+We hold another set (not shared with you) on which we will test your code. 
+Results
+The submitted results file should have a single, space separated line containing only zeros and ones (integers) denoting the predicted class (0 for Trump, 1 for a staffer). The order of the labels MUST correspond to the tweet order in the testset. 
+
+
+
+
+Environment, Libraries, and dependencies
+
+
+You can use Google Colab as your environment (and submit a notebook file). Your colab notebooks should be self-contained with all the necessary imports and should be executed smoothly on Colab. Colab natively supports pandas, numpy, sklearn, nltk and other useful modules and packages. It also works well with Huggingface Transformer models, see examples:
+   1. A basic example of using a pretrained Roberta sentiment analyzer: here
+   2. Fine tuning a model: here
+
+
+Make sure you use supported modules and packages so they can be imported directly, without the need to upload any library. 
+
+
+Report
+You should  limit your report to three (3!) pages (font size 11p, line spacing  of 1.5.). You can submit your report in Hebrew if you like[2]. The report should be a PDF file.
+
+
+About 1.5 pages should be used to report your setting and results and in the other ~1.5 pages you should discuss the different performance of the various algorithms on the different datasets (that is - analysis and insights, not just a comparison of numbers that were already provided in the previous pages).
+
+
+Your report should include a detailed list of models, your assumptions about the data, and the preprocessing steps you took. You should clearly indicate the differences between the different algorithms and the various settings. Results should be reported in a table. 
+The last page and a half (approximately) should include your insights and conclusions as learnt from the data. Specifically you should address the following:
+1. How was the corpus preprocessed and why (in the “insights page” you are required to reflect on and justify your preprocessing choices).
+2. What data/features were used in each setting
+3. What is the data representation (input) for each of the algorithms?
+4. What are the settings (hyper parameters, etc.) used for each algorithm?
+5. Comparison between algorithms and settings.
+6. If there are significant performance differences between algorithms/settings - why do you think that is.
+7. You should specify the model and the exact parameters that yielded the best results on the test set (as submitted in the results file).  
+
+
+
+
+Submission guidelines:
+
+
+1. You should submit one tar-ball  tar.gz file with all relevant code, results, and reports. The file should be named <id 1>_<id 2>.tar.gz (or <id>.tar.gz if you choose to submit alone). The tar-ball should at least include the following files:
+   1. Report: the main requirement of this assignment is a report file explaining your use of the algorithms and describing the results - comparing results of different algorithms and different configurations of parameters. This file should be named  <id 1>_<id 2>.pdf (or <your_id>.pdf) .
+   2. A results file for the authorship attribution task called <id 1>_<id 2>_aa.txt (or <id>_aa.txt) corresponding to this test set. This file should hold the results of your best performing model. Format specification above. 
+   3. Source code: You should submit a Python Notebook (ex3_<id 1>_<id 2>.ipynb) that could be uploaded and executed in Google Colab.
+Code files should be well documented with clear usage examples so different models could be easily executed. You should base your notebook on this skeleton (make a copy and rename) and it should support the following API (see documentation in the notebook):
+def training_pipeline(alg, train_fn)
+retrain_best_model(train_fn = None)
+def predict(m, fn)
+def who_am_i()
+
+
+   1. While we are not focused on code optimization, we do expect your code to run in a reasonable time. That is - if your code runs for a couple of hours it may suggest something is wrong. 
+   2. Integrity: By submitting this assignment you confirm you have read and adhere to the integrity code. 
+
+
+________________
+[1] Trump switched to a secured iPhone in April 2017, hence, building an accurate authorship model on older data can be used for authorship attribution of newer tweets. 
+[2] While the purpose of the report is not to test your English writing skills, we do expect the report to be readable and concise. You will not be punished for mediocre writing but we will reduce points if the report is badly written. We encourage the use of Grammarly or ChatGPT for polishing and rephrasing. If you choose to use assistive tools, please indicate it in a footnote.
