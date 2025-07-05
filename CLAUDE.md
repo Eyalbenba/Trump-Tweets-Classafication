@@ -1,5 +1,7 @@
 # Trump Tweets Classification Project - CLAUDE.md
 
+YOU MUST MAKE SMALL INCREMENTAL CHANGES AND ASK THE USER FOR INFORMATION AT EACH STAGE.
+
 ## Project Overview
 This is an authorship attribution project for classifying Donald Trump's tweets to determine whether they were written by Trump himself (Android device) or his staffers (iPhone device). The project implements 5 different machine learning algorithms as part of Assignment 3 for text classification and authorship attribution.
 
@@ -9,6 +11,40 @@ This is an authorship attribution project for classifying Donald Trump's tweets 
 - **Task**: Binary classification of Trump's tweets (0=Trump/Android, 1=Staffer/iPhone)
 - **Required Algorithms**: 5 total (Logistic Regression, SVM with linear/nonlinear kernels, FFNN with PyTorch, 4th classifier of choice, 5th transformer-based classifier)
 
+## User Guidelines for Working with Claude
+
+### When Starting Work
+- Always reference this CLAUDE.md file to understand project context
+- Check the implementation plan in `plan/implementation_plan.md` for current phase
+- Review assignment instructions in `instructions/Assingement_Instructions.txt` if needed
+
+### Code Development Approach
+- Follow the 8-phase implementation plan in `plan/implementation_plan.md`
+- Work incrementally: complete one algorithm before moving to the next
+- Test each component thoroughly before integration
+- Maintain clean, documented code throughout development
+
+### File Organization Guidelines
+- Save preprocessing outputs to `data/processed/` for reuse
+- Store trained models in appropriate `models/` subdirectories
+- Keep experimental work in `experiments/` notebooks
+- Save results and metrics to `results/` directory structure
+
+### Critical Reminders
+- Must implement ALL 4 required API functions in submission notebook
+- SVM must include BOTH linear and nonlinear kernels
+- FFNN must have at least one hidden layer using PyTorch
+- Transformer model is required as the 5th classifier
+- All code must run in Google Colab environment
+- Final predictions must be single line of space-separated 0s and 1s
+
+### Best Practices
+- Always use cross-validation for model evaluation
+- Document preprocessing decisions and hyperparameter choices
+- Compare model performance systematically
+- Keep track of best performing configurations
+- Test final notebook end-to-end before submission
+- 
 ## Required Functions API
 The submission notebook must implement these functions:
 - `training_pipeline(alg, train_fn)`
@@ -89,37 +125,3 @@ The submission notebook must implement these functions:
 - Focus on model interpretability and analysis
 - Document all decisions and assumptions
 - Test notebook in clean Colab environment before submission
-
-## User Guidelines for Working with Claude
-
-### When Starting Work
-- Always reference this CLAUDE.md file to understand project context
-- Check the implementation plan in `plan/implementation_plan.md` for current phase
-- Review assignment instructions in `instructions/Assingement_Instructions.txt` if needed
-
-### Code Development Approach
-- Follow the 8-phase implementation plan in `plan/implementation_plan.md`
-- Work incrementally: complete one algorithm before moving to the next
-- Test each component thoroughly before integration
-- Maintain clean, documented code throughout development
-
-### File Organization Guidelines
-- Save preprocessing outputs to `data/processed/` for reuse
-- Store trained models in appropriate `models/` subdirectories
-- Keep experimental work in `experiments/` notebooks
-- Save results and metrics to `results/` directory structure
-
-### Critical Reminders
-- Must implement ALL 4 required API functions in submission notebook
-- SVM must include BOTH linear and nonlinear kernels
-- FFNN must have at least one hidden layer using PyTorch
-- Transformer model is required as the 5th classifier
-- All code must run in Google Colab environment
-- Final predictions must be single line of space-separated 0s and 1s
-
-### Best Practices
-- Always use cross-validation for model evaluation
-- Document preprocessing decisions and hyperparameter choices
-- Compare model performance systematically
-- Keep track of best performing configurations
-- Test final notebook end-to-end before submission
